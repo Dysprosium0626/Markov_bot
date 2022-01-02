@@ -7,8 +7,7 @@ from random import randint
 import re
 
 class Generator:
-    def __init__(self, name, dataset):
-        self.name = name
+    def __init__(self, dataset):
         self.dataset = dataset
 
     def get_next_word(self, dataset, word):
@@ -31,49 +30,7 @@ class Generator:
             end = sentences[-1:]
             if end == end_sign:
                 break
-            next_word = self.get_next_word(dataset, end)
+            next_word = self.get_next_word(self.dataset, end)
             sentences.append(next_word)
         return word_separator.join(sentences[1:][:-1])
 
-
-if __name__ == '__main__':
-
-    text = ''
-
-    with open("Data.txt", "r", encoding='utf-8') as f:
-        for line in f:
-            if line == '\n' or line.startswith('Page '):
-                continue
-
-            text += line.rstrip() + ' '
-
-    # Filtered = filter(None, re.split("\“|\” |; |, |\? |! |\. |\.\n", text))
-    Filtered = filter(None, re.split("; |! |\. |\.\n", text))
-    sentences = list(Filtered)
-
-    dataset = {}
-
-    for sentence in sentences:
-        sentence = '^ ' + sentence + ' $'
-        words_list = sentence.split(' ')
-        q = p = words_list[0]
-
-        for word in words_list[1:]:
-            p = q
-            q = word
-            # print(p, q)
-            if p in dataset.keys():
-                if q in dataset[p]:
-                    dataset[p][q] += 1
-                else:
-                    dataset[p][q] = 1
-            else:
-                dataset[p] = {}
-                dataset[p][q] = 1
-
-    # create a generator
-    name = input('plz enter the name:')
-    g = Generator(name, dataset)
-    # the first letter of the text must be '^'
-    result = g.generate(' ')
-    print(result)
