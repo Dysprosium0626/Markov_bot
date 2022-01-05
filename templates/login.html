@@ -1,6 +1,3 @@
-
-
-
 <html>
     <head>
       <title>demo</title>
@@ -9,22 +6,38 @@
     </head>
     <body>
       <div id="主体">
-        <div id="标题">Article Generator Based on Markov Chain</div>
+        <div id="标题">文章生成器</div>
         <div id="主题">
-          <form method="post" action="/login">
+          <form action=/login method="post" enctype="multipart/form-data">
             <table>
                 <tr>
                     <th>
                         <div class="group">
-                            <input type="text" required="required" id="zt" name="theme"/><span class="highlight"></span><span class="bar"></span>
-                            <label>Select your theme</label>
-                        </div>
+                            <span id="请选择">请选择文章</span>
+                            <select name="theme">
+                                <optgroup label="中文文章">
+                                    <option value="1">活着</option>
+                                    <option value="2">月亮与六便士</option>
+                                </optgroup>
 
+                                <optgroup label="English Article">
+                                    <option value="3">Harry Potter</option>
+                                    <option value="4">The Hitchhiker's Guide to the Galaxy</option>
+                                    <option value="5">Alice in Wonderland</option>
+                                    <option value="6">The Old Man and Sea</option>
+                                    <option value="7">Sherlock Holmes</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </th>
+                    <th>
+                        <span id="请选择">或上传文章</span>
+                        <input type="file" name="myfile">
                     </th>
                     <th>
                         <div class="group">
                             <input type="text" required="required" id="zs" name="number"/><span class="highlight"></span><span class="bar"></span>
-                            <label>Number of Sentences</label>
+                            <label>请输入文章句数</label>
                         </div>
                     </th>
                     <th>
@@ -37,7 +50,7 @@
           </form>
         </div>
         <div id="文章">
-            {{ str }}
+            {{str}}
         </div>
       </div>
     </body>
@@ -53,6 +66,19 @@
       margin: auto;
       text-align: center;
   }
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 160px;
+    background-color: #e8eeef;
+    color: #2e4049;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+}
   #主体{
     border: 2px solid #0c0c0c;
     margin: 20px;
@@ -60,7 +86,6 @@
     background: #424242;
   }
   #标题{
-    font-family: "Times New Roman", Times, serif;
     font-size: 3em;
     font-weight: 300;
     text-align: center;
@@ -70,6 +95,10 @@
     text-align: center;
     margin-top: 6px;
     font-size: 0px;
+  }
+  #请选择{
+      font-size: 18px;
+      color: #c6c6c6;
   }
   .group {
     position: relative;
@@ -109,7 +138,7 @@ label {
     font-weight: normal;
     position: absolute;
     pointer-events: none;
-    left: 70px;
+    left: 90px;
     top: 10px;
     -webkit-transition: 300ms ease all;
     transition: 300ms ease all;
@@ -147,14 +176,6 @@ label {
     color: #8b8b8b;
     box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
 }
-.btn.btn-link {
-    background: #2196F3;
-    color: #d3eafd;
-}
-.btn.btn-link:hover {
-    background: #0d8aee;
-    color: #deeffd;
-}
 .btn.btn-submit {
     background: #2196F3;
     color: #bce0fb;
@@ -162,13 +183,6 @@ label {
 .btn.btn-submit:hover {
     background: #0d8aee;
     color: #deeffd;
-}
-.btn.btn-cancel {
-    background: #eee;
-}
-.btn.btn-cancel:hover {
-    background: #e1e1e1;
-    color: #8b8b8b;
 }
 .btn-box {
     text-align: center;
