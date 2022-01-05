@@ -1,0 +1,146 @@
+<!doctype html>
+<title>Hello Sample</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+<div class="page">
+    {% block body %}
+    {% endblock %}
+</div>
+
+
+<!--  <style>-->
+<!--  body{-->
+<!--    margin: 0;-->
+<!--    background: #424242;-->
+<!--  }-->
+<!--  table{-->
+<!--      margin: auto;-->
+<!--      text-align: center;-->
+<!--  }-->
+<!--  #主体{-->
+<!--    border: 2px solid #0c0c0c;-->
+<!--    margin: 20px;-->
+<!--    padding: 20px;-->
+<!--    background: #424242;-->
+<!--  }-->
+<!--  #标题{-->
+<!--    font-size: 3em;-->
+<!--    font-weight: 300;-->
+<!--    text-align: center;-->
+<!--    color: #2196F3;-->
+<!--  }-->
+<!--  #主题{-->
+<!--    text-align: center;-->
+<!--    margin-top: 6px;-->
+<!--    font-size: 0px;-->
+<!--  }-->
+<!--  .group {-->
+<!--    position: relative;-->
+<!--    margin: 45px 0;-->
+<!--}-->
+<!--input {-->
+<!--    background: none;-->
+<!--    color: #c6c6c6;-->
+<!--    font-size: 18px;-->
+<!--    padding: 10px 10px 10px 5px;-->
+<!--    display: block;-->
+<!--    width: 320px;-->
+<!--    border: none;-->
+<!--    border-radius: 4px 4px 4px 4px/0 0 0 0  ;-->
+<!--    border-bottom: 1px solid #c6c6c6;-->
+<!--}-->
+<!--input:-webkit-autofill{-->
+<!--    transition: background-color 5000s;-->
+<!--    -webkit-text-fill-color: #c6c6c6;-->
+<!--}-->
+<!--input:focus {-->
+<!--    outline: none;-->
+<!--}-->
+<!--input:focus ~ label,-->
+<!--input:valid ~ label {-->
+<!--    top: -16px;-->
+<!--    left: 0px;-->
+<!--    font-size: 12px;-->
+<!--    color: #2196F3;-->
+<!--}-->
+<!--input:focus ~ .bar:before {-->
+<!--    width: 320px;-->
+<!--}-->
+<!--label {-->
+<!--    color: #c6c6c6;-->
+<!--    font-size: 20px;-->
+<!--    font-weight: normal;-->
+<!--    position: absolute;-->
+<!--    pointer-events: none;-->
+<!--    left: 130px;-->
+<!--    top: 10px;-->
+<!--    -webkit-transition: 300ms ease all;-->
+<!--    transition: 300ms ease all;-->
+<!--}-->
+<!--.bar {-->
+<!--    position: relative;-->
+<!--    display: block;-->
+<!--    width: 320px;-->
+<!--}-->
+<!--.bar:before {-->
+<!--    content: '';-->
+<!--    height: 2px;-->
+<!--    width: 0;-->
+<!--    bottom: 0px;-->
+<!--    position: absolute;-->
+<!--    background: #2196F3;-->
+<!--    -webkit-transition: 300ms ease all;-->
+<!--    transition: 300ms ease all;-->
+<!--    left: 0%;-->
+<!--}-->
+<!--.btn {-->
+<!--    background: #fff;-->
+<!--    color: #959595;-->
+<!--    border: none;-->
+<!--    padding: 10px 20px;-->
+<!--    border-radius: 3px;-->
+<!--    text-transform: uppercase;-->
+<!--    text-decoration: none;-->
+<!--    outline: none;-->
+<!--    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);-->
+<!--    -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);-->
+<!--    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);-->
+<!--}-->
+<!--.btn:hover {-->
+<!--    color: #8b8b8b;-->
+<!--    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);-->
+<!--}-->
+<!--.btn.btn-link {-->
+<!--    background: #2196F3;-->
+<!--    color: #d3eafd;-->
+<!--}-->
+<!--.btn.btn-link:hover {-->
+<!--    background: #0d8aee;-->
+<!--    color: #deeffd;-->
+<!--}-->
+<!--.btn.btn-submit {-->
+<!--    background: #2196F3;-->
+<!--    color: #bce0fb;-->
+<!--}-->
+<!--.btn.btn-submit:hover {-->
+<!--    background: #0d8aee;-->
+<!--    color: #deeffd;-->
+<!--}-->
+<!--.btn.btn-cancel {-->
+<!--    background: #eee;-->
+<!--}-->
+<!--.btn.btn-cancel:hover {-->
+<!--    background: #e1e1e1;-->
+<!--    color: #8b8b8b;-->
+<!--}-->
+<!--.btn-box {-->
+<!--    text-align: center;-->
+<!--    margin: 50px 0;-->
+<!--}-->
+<!--  #文章{-->
+<!--    margin-top: 6px;-->
+<!--    font-size: 2rem;-->
+<!--    text-align: justify;-->
+<!--    color: #c6c6c6;-->
+<!--  }-->
+
+<!--  </style>-->

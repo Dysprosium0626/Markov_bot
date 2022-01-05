@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'index'
+    return 'Please go to \'/login\' for more information'
 
 
 @app.route('/login', methods=['POST', 'GET'])
