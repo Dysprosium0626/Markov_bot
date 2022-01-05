@@ -22,7 +22,7 @@ class Analysis:
                 text += line.rstrip() + ' '
 
         # Filtered = filter(None, re.split("\“|\” |; |, |\? |! |\. |\.\n", text))
-        Filtered = filter(None, re.split("; |! |\. |\.\n", text))
+        Filtered = filter(None, re.split("; |! |\. |\.\n |，|。|；", text))
         sentences = list(Filtered)
         return sentences
 
@@ -32,6 +32,7 @@ class Analysis:
         for sentence in sentences:
             sentence = '^ ' + sentence + ' $'
             words_list = sentence.split(' ')
+            # words_list = list(jieba.cut(sentence))
             q = p = words_list[0]
 
             for word in words_list[1:]:
@@ -47,3 +48,10 @@ class Analysis:
                     dataset[p] = {}
                     dataset[p][q] = 1
         return dataset
+
+
+if __name__ == '__main__':
+    txt = input("Please enter the text file to be analyzed:")
+    analysis = Analysis(txt)
+    sentences = analysis.split_text_into_sentences()
+    print(sentences)
