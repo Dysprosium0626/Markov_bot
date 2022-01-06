@@ -9,10 +9,10 @@
       <div id="主体">
         <div id="标题">文章生成器</div>
         <div id="表单">
-            <form action="/login" method="post" enctype="multipart/form-data">
+            <form action="/indext" method="post">
                 <div id="选择文章">
                         <div id="提示">选择文章</div>
-                        <select name="theme" class="select">
+                        <select name="theam" class="select">
                                 <option value="1">活着</option>
                                 <option value="2">月亮与六便士</option>
                         </select>
@@ -21,21 +21,19 @@
                     <div id="提示">上传文章</div>
                     <div class="file">
                         上传文章
-                        <input type="file" name="myfile" accept="text/plain" id="upload"></input>
+                        <input type="file" name="file" accept="text/plain" id="upload"></input>
                     </div>
                 </div>
                 <div class="group" id="句数">
                     <div id="提示">请输入文章句数</div>
-                    <input type="number" min="0" max="1000" value="10" class="input" name="number"/>
+                    <input type="number" min="0" max="1000" value="10" class="input"/>
                 </div>
                 <div class="btn-box" id="生成">
                     <button type="submit" class="button" id="生成">生成</button>
                 </div>
                 </form>
         </div>
-        <div id="文章">
-            {{str}}
-        </div>
+        <div id="文章"></div>
       </div>
     </body>
 </html>

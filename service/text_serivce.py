@@ -22,10 +22,14 @@ class TextService:
         number = self.number
         analysis = Analysis(text)
         sentences = analysis.split_string_into_sentences()
-        dataset = analysis.prepare_dataset(sentences)
+        dataset, head, LANG = analysis.prepare_dataset(sentences)
         # create a generator
-        g = Generator(dataset)
+        g = Generator(dataset, head)
         result = ""
-        for i in range(0, number):
-            result += g.generate(' ') + '. '
+        if LANG == 'ch':
+            for i in range(0, number):
+                result += g.generate('') + '。'
+        else:
+            for i in range(0, number):
+                result += g.generate(' ') + '. '
         return result

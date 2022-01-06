@@ -5,12 +5,15 @@
 # @File    : analysis.py
 
 import re
+import jieba
 
 
 class Analysis:
 
     def __init__(self, string):
         self.string = string
+        self.key_len = 2
+        self.sentences = []
 
     def split_string_into_sentences(self):
         text = self.string
@@ -22,10 +25,10 @@ class Analysis:
         #         text += line.rstrip() + ' '
 
         # Filtered = filter(None, re.split("\“|\” |; |, |\? |! |\. |\.\n", text))
-        Filtered = filter(None, re.split("\“|\” |; |! |\. |\n |，|。|；|, ", text))
+        Filtered = filter(None, re.split("\“|\” |; |! |\. |\n |，|。|；|, |：|: |\?|” ", text))
         sentences = list(Filtered)
-        return sentences
-
+        self.sentences = sentences
+        return None
 
     def split_text_into_sentences(self):
         lines = []
@@ -37,32 +40,50 @@ class Analysis:
 
         text = ' '.join(lines).replace('\n', '')
         # Filtered = filter(None, re.split("\“|\” |; |, |\? |! |\. |\.\n", text))
-        Filtered = filter(None, re.split("\“|\” |; |! |\. |，|。|；", text))
+        # Filtered = filter(None, re.split("\“|\” |; |! |\. |，|。|；", text))
+        Filtered = filter(None, re.split("\“|\” |; |! |\. |\n |，|。|；|, |：|: |\?|” ", text))
         sentences = list(Filtered)
-        return sentences
+        self.sentences = sentences
+        return None
 
     def prepare_dataset(self, sentences):
         dataset = {}
+        sent_head = {}
+        if sentences == None:
+            sentences = self.sentences
+
+        LANG = 'en'
+        for _char in sentences[0]:
+            if '\u4e00' <= _char <= '\u9fa5':
+                LANG = 'ch'
 
         for sentence in sentences:
             sentence = '^ ' + sentence + ' $'
-            words_list = sentence.split(' ')
-            # words_list = list(jieba.cut(sentence))
-            q = p = words_list[0]
+            if LANG == 'en':
+                words_list = sentence.split(' ')
+            else:
+                words_list = list(jieba.cut(sentence))
 
-            for word in words_list[1:]:
-                p = q
-                q = word
+            keys = words_list[:self.key_len]
+
+            if keys[1] in sent_head.keys():
+                sent_head[keys[1]] += 1
+            else:
+                sent_head[keys[1]] = 1
+
+            for word in words_list[self.key_len:]:
                 # print(p, q)
-                if p in dataset.keys():
-                    if q in dataset[p]:
-                        dataset[p][q] += 1
+                if tuple(keys) in dataset.keys():
+                    if word in dataset[tuple(keys)]:
+                        dataset[tuple(keys)][word] += 1
                     else:
-                        dataset[p][q] = 1
+                        dataset[tuple(keys)][word] = 1
                 else:
-                    dataset[p] = {}
-                    dataset[p][q] = 1
-        return dataset
+                    dataset[tuple(keys)] = {}
+                    dataset[tuple(keys)][word] = 1
+                keys.pop(0)
+                keys.append(word)
+        return dataset, sent_head, LANG
 
 
 if __name__ == '__main__':

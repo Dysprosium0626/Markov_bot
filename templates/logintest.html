@@ -1,0 +1,198 @@
+<html>
+    <head>
+      <title>demo</title>
+      <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <body>
+      <div id="主体">
+        <div id="标题">文章生成器</div>
+        <div id="主题">
+          <form action=/login method="post" enctype="multipart/form-data">
+            <table>
+                <tr>
+                    <th>
+                        <div class="group">
+                            <span id="请选择">请选择文章</span>
+                            <select name="theme">
+                                <optgroup label="中文文章">
+                                    <option value="1">活着</option>
+                                    <option value="2">月亮与六便士</option>
+                                </optgroup>
+
+                                <optgroup label="English Article">
+                                    <option value="3">Harry Potter</option>
+                                    <option value="4">The Hitchhiker's Guide to the Galaxy</option>
+                                    <option value="5">Alice in Wonderland</option>
+                                    <option value="6">The Old Man and Sea</option>
+                                    <option value="7">Sherlock Holmes</option>
+                                </optgroup>
+                            </select>
+                        </div>
+                    </th>
+                    <th>
+                        <span id="请选择">或上传文章</span>
+                        <input type="file" name="myfile">
+                    </th>
+                    <th>
+                        <div class="group">
+                            <input type="text" required="required" id="zs" name="number"/><span class="highlight"></span><span class="bar"></span>
+                            <label>请输入文章句数</label>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="btn-box">
+                            <button type="submit" class="btn btn-submit" id="生成">生成</button>
+                        </div>
+                    </th>
+                </tr>
+            </table>
+          </form>
+        </div>
+        <div id="文章">
+            {{str}}
+        </div>
+      </div>
+    </body>
+  </html>
+
+
+  <style>
+  body{
+    margin: 0;
+    background: #424242;
+  }
+  table{
+      margin: auto;
+      text-align: center;
+  }
+  select {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 10px;
+    width: 160px;
+    background-color: #e8eeef;
+    color: #2e4049;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+}
+  #主体{
+    border: 2px solid #0c0c0c;
+    margin: 20px;
+    padding: 20px;
+    background: #424242;
+  }
+  #标题{
+    font-size: 3em;
+    font-weight: 300;
+    text-align: center;
+    color: #2196F3;
+  }
+  #主题{
+    text-align: center;
+    margin-top: 6px;
+    font-size: 0px;
+  }
+  #请选择{
+      font-size: 18px;
+      color: #c6c6c6;
+  }
+  .group {
+    position: relative;
+    margin: 45px 0;
+}
+input {
+    background: none;
+    color: #c6c6c6;
+    font-size: 18px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 320px;
+    border: none;
+    border-radius: 4px 4px 4px 4px/0 0 0 0  ;
+    border-bottom: 1px solid #c6c6c6;
+}
+input:-webkit-autofill{
+    transition: background-color 5000s;
+    -webkit-text-fill-color: #c6c6c6;
+}
+input:focus {
+    outline: none;
+}
+input:focus ~ label,
+input:valid ~ label {
+    top: -16px;
+    left: 0px;
+    font-size: 12px;
+    color: #2196F3;
+}
+input:focus ~ .bar:before {
+    width: 320px;
+}
+label {
+    color: #c6c6c6;
+    font-size: 20px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 90px;
+    top: 10px;
+    -webkit-transition: 300ms ease all;
+    transition: 300ms ease all;
+}
+.bar {
+    position: relative;
+    display: block;
+    width: 320px;
+}
+.bar:before {
+    content: '';
+    height: 2px;
+    width: 0;
+    bottom: 0px;
+    position: absolute;
+    background: #2196F3;
+    -webkit-transition: 300ms ease all;
+    transition: 300ms ease all;
+    left: 0%;
+}
+.btn {
+    background: #fff;
+    color: #959595;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    outline: none;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    -webkit-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.btn:hover {
+    color: #8b8b8b;
+    box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
+}
+.btn.btn-submit {
+    background: #2196F3;
+    color: #bce0fb;
+}
+.btn.btn-submit:hover {
+    background: #0d8aee;
+    color: #deeffd;
+}
+.btn-box {
+    text-align: center;
+    margin: 50px 0;
+}
+  #文章{
+    margin-top: 6px;
+    font-size: 2rem;
+    text-align: justify;
+    color: #c6c6c6;
+  }
+
+  </style>

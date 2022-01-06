@@ -37,16 +37,16 @@ class ArticleService:
         elif theme == '7':
             analysis = Analysis("./data/sh.txt")
         sentences = analysis.split_text_into_sentences()
-        dataset = analysis.prepare_dataset(sentences)
+        dataset, head, LANG = analysis.prepare_dataset(sentences)
         # create a generator
-        g = Generator(dataset)
+        g = Generator(dataset, head)
         result = ""
         if theme == '1':
             for i in range(0, number):
-                result += g.generate(' ') + '。'
+                result += g.generate('') + '。'
         elif theme == '2':
             for i in range(0, number):
-                result += g.generate(' ') + '。'
+                result += g.generate('') + '。'
         else:
             for i in range(0, number):
                 result += g.generate(' ') + '. '
