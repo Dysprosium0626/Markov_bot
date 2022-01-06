@@ -1,0 +1,233 @@
+<html>
+    <head>
+      <title>修改中
+      </title>
+      <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    </head>
+    <body>
+      <div id="主体">
+        <div id="标题">基于马尔可夫链的写作机器人</div>
+        <div id="英文">
+            <a href="indext(en).html" class="a">English</a>
+        </div>
+        <div id="表单">
+            <form action="/indext" method="post" enctype="multipart/form-data">
+                <div id="选择文章">
+                        <div id="提示">选择文章</div>
+                        <select name="theme" class="select">
+                                <option value="1">活着</option>
+                                <option value="2">月亮与六便士</option>
+                        </select>
+                </div>
+                <div id="或">
+                    或
+                </div>
+                <div id="上传文章">
+                    <div id="提示">上传文章</div>
+                    <div class="file">
+                        上传文章
+                        <input type="file" name="myfile" accept="text/plain" id="upload"></input>
+                    </div>
+                </div>
+                <div class="group" id="句数">
+                    <div id="提示">文章句数</div>
+                    <input type="number" min="0" max="1000" value="10" class="input" name="number"/>
+                </div>
+                <div class="btn-box" id="生成">
+                    <button type="submit" class="button">生成</button>
+                </div>
+                </form>
+        </div>
+        <div id="文章"></div>
+      </div>
+    </body>
+</html>
+
+<style>
+    body{
+        background-color: rgb(238,240,245);
+    }
+    #主体{
+        border: 2px solid #0c0c0c;
+        text-align: center;
+        margin: 0 auto;
+    }
+    #标题{
+        font-size: 48px;
+        font-weight: 500;
+    }
+    #英文{
+        text-align: right;
+        margin-right: 10px;
+        font-size: 18px;
+    }
+    .a{
+        font-style: normal;
+        color: #000;
+    }
+    #表单{
+        margin: 0 auto;
+        text-align: center;
+        padding: 10px;
+        height: 200px;
+        width:fit-content;
+    }
+    #提示{
+        font-size: 24px;
+        font-weight: 400;
+        margin-bottom: 20px;
+    }
+    #选择文章{
+        float: left;
+        width: 200px;
+        padding: 25px;
+        text-align: center;
+    }
+    #或{
+        float: left;
+        font-size: 40px;
+        line-height: 60px;
+        padding-bottom: 25px;
+        margin-top: 77px;
+    }
+    #上传文章{
+        float: left;
+        width: 200px;
+        padding: 25px;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+    #句数{
+        float: left;
+        width: 200px;
+        padding: 25px;
+        text-align: center;
+    }
+    #生成{
+        float: left;
+        width: 180px;
+        height: 60px;
+        padding: 25px;
+        margin-top: 52px;
+    }
+    #文章{
+        font-size: 18px;
+        /* border: 2px dashed #0c0c0c ; */
+        text-align: left;
+        text-indent: 2em;
+        margin: 5px 150px 20px 150px;
+    }
+    .file {
+        position: relative;
+        display: inline-block;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        padding: 18px 54px;
+        font-size: 18px;
+        font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;;
+        color: rgba(48, 52, 84, 1);
+        border: none;
+        border-radius: 16px;
+        background-color: rgba(238, 240, 245, 1);
+        cursor: pointer;
+        outline: none;
+        text-shadow: 0 -1px 0 rgba(12, 13, 18, 0.08), 0 1px 0 rgba(255, 255, 255, 1);
+        box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 1), -2px -2px 2px rgba(255, 255, 255, 0.9), -4px -4px 6px rgba(255, 255, 255, 0.9), -8px -8px 16px rgba(255, 255, 255, 0.9), -12px -12px 24px rgba(255, 255, 255, 0.9), inset -1px -1px 1px rgba(12, 13, 18, 0.06), 2px 2px 2px rgba(12, 13, 18, 0.08), 4px 4px 6px rgba(12, 13, 18, 0.08), 8px 8px 16px rgba(12, 13, 18, 0.08), 12px 12px 24px rgba(12, 13, 18, 0.08);
+        -webkit-transition: color 0.3s, text-shadow 0.3s, box-shadow 0.6s;
+        transition: color 0.3s, text-shadow 0.3s, box-shadow 0.6s;
+    }
+    .file input {
+        position: absolute;
+        font-size: 50px;
+        right: 0;
+        top: 0;
+        opacity: 0;
+    }
+    .file:hover {
+        color: rgba(0, 80, 220, 1);
+        text-shadow: 0 -1px 0 rgba(12, 13, 18, 0.08), 0 1px 0 rgba(255, 255, 255, 1), 0 0 1px rgba(255, 255, 255, 0.7), 0 0 4px rgba(0, 150, 255, 0.08), 0 0 8px rgba(0, 150, 255, 0.08);
+        box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 1), -3px -3px 3px rgba(255, 255, 255, 1), -5px -5px 6px rgba(255, 255, 255, 1), -10px -10px 16px rgba(255, 255, 255, 1), -14px -14px 24px rgba(255, 255, 255, 1), inset -1px -1px 1px rgba(12, 13, 18, 0.06), 3px 3px 3px rgba(12, 13, 18, 0.085), 5px 5px 6px rgba(12, 13, 18, 0.085), 10px 10px 16px rgba(12, 13, 18, 0.085), 14px 14px 24px rgba(12, 13, 18, 0.085);
+    }
+    .file:active {
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 1), inset -2px -2px 2px rgba(255, 255, 255, 0.9), inset -3px -3px 4px rgba(255, 255, 255, 0.9), inset -6px -6px 12px rgba(255, 255, 255, 0.9), inset -8px -8px 16px rgba(255, 255, 255, 0.9), -1px -1px 1px rgba(12, 13, 18, 0.06), inset 2px 2px 2px rgba(12, 13, 18, 0.08), inset 3px 3px 4px rgba(12, 13, 18, 0.08), inset 6px 6px 12px rgba(12, 13, 18, 0.08), inset 8px 8px 16px rgba(12, 13, 18, 0.08);
+}
+    
+    .button {
+    display: inline-block;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    padding: 18px 72px;
+    font-size: 18px;
+    font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;;
+    color: rgba(48, 52, 84, 1);
+    border: none;
+    border-radius: 16px;
+    background-color: rgba(238, 240, 245, 1);
+    cursor: pointer;
+    outline: none;
+    text-shadow: 0 -1px 0 rgba(12, 13, 18, 0.08), 0 1px 0 rgba(255, 255, 255, 1);
+    box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 1), -2px -2px 2px rgba(255, 255, 255, 0.9), -4px -4px 6px rgba(255, 255, 255, 0.9), -8px -8px 16px rgba(255, 255, 255, 0.9), -12px -12px 24px rgba(255, 255, 255, 0.9), inset -1px -1px 1px rgba(12, 13, 18, 0.06), 2px 2px 2px rgba(12, 13, 18, 0.08), 4px 4px 6px rgba(12, 13, 18, 0.08), 8px 8px 16px rgba(12, 13, 18, 0.08), 12px 12px 24px rgba(12, 13, 18, 0.08);
+    -webkit-transition: color 0.3s, text-shadow 0.3s, box-shadow 0.6s;
+    transition: color 0.3s, text-shadow 0.3s, box-shadow 0.6s;
+}
+.button:hover {
+    color: rgba(0, 80, 220, 1);
+    text-shadow: 0 -1px 0 rgba(12, 13, 18, 0.08), 0 1px 0 rgba(255, 255, 255, 1), 0 0 1px rgba(255, 255, 255, 0.7), 0 0 4px rgba(0, 150, 255, 0.08), 0 0 8px rgba(0, 150, 255, 0.08);
+    box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 1), -3px -3px 3px rgba(255, 255, 255, 1), -5px -5px 6px rgba(255, 255, 255, 1), -10px -10px 16px rgba(255, 255, 255, 1), -14px -14px 24px rgba(255, 255, 255, 1), inset -1px -1px 1px rgba(12, 13, 18, 0.06), 3px 3px 3px rgba(12, 13, 18, 0.085), 5px 5px 6px rgba(12, 13, 18, 0.085), 10px 10px 16px rgba(12, 13, 18, 0.085), 14px 14px 24px rgba(12, 13, 18, 0.085);
+}
+
+.button:active {
+    box-shadow: 1px 1px 1px rgba(255, 255, 255, 1), inset -2px -2px 2px rgba(255, 255, 255, 0.9), inset -3px -3px 4px rgba(255, 255, 255, 0.9), inset -6px -6px 12px rgba(255, 255, 255, 0.9), inset -8px -8px 16px rgba(255, 255, 255, 0.9), -1px -1px 1px rgba(12, 13, 18, 0.06), inset 2px 2px 2px rgba(12, 13, 18, 0.08), inset 3px 3px 4px rgba(12, 13, 18, 0.08), inset 6px 6px 12px rgba(12, 13, 18, 0.08), inset 8px 8px 16px rgba(12, 13, 18, 0.08);
+}
+    .input {
+    display: block;
+    margin: 0 auto;
+    height: 60px;
+    padding: 0 24px;
+    box-sizing: border-box;
+    font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;
+    font-size: 18px;
+    line-height: 60px;
+    border-radius: 16px;
+    border: none;
+    color: rgb(48,52,84);
+    background: rgba(240, 242, 247, 1);
+    box-shadow: inset 1px 1px 1px rgba(255, 255, 255, 0.4), inset -1px -1px 1px rgba(12, 13, 18, 0.04), inset 0 0 0 2px rgba(238, 240, 245, 1), inset -2px -2px 2px 2px rgba(255, 255, 255, 0.4), inset -4px -4px 4px 2px rgba(255, 255, 255, 0.4), -1px -1px 4px 0px rgba(255, 255, 255, 0.4), -2px -2px 8px 0px rgba(255, 255, 255, 0.4), inset 2px 2px 2px 2px rgba(12, 13, 18, 0.04), inset 4px 4px 4px 2px rgba(12, 13, 18, 0.04), 1px 1px 4px 0px rgba(12, 13, 18, 0.04), 2px 2px 8px 0px rgba(12, 13, 18, 0.04);
+}
+    .input[type="number"] {
+    width: 180;
+    font-family: digital;
+    font-size: 18px;
+    line-height: 18px;
+    text-align: center;
+    }
+    .input:focus{
+        outline: none;
+    }
+    .select {
+        position: relative;
+        height: 60px;
+        padding: 0 48px 0 24px;
+        box-sizing: border-box;
+        font-family: 'Montserrat';
+        border: 0;
+        border-radius: 16px;
+        background-color: rgb(238,240,245);
+        background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1329536/icon_select_s.svg');
+        background-position: calc(100% - 16px) center;
+        background-repeat: no-repeat;
+        box-shadow: inset 1px 1px 1px rgba(255,255,255,0.6), inset -1px -1px 1px rgba(12,13,18,0.06), -1px -1px 4px 0px rgba(255,255,255,0.6), -2px -2px 8px 0px rgba(255,255,255,0.6), 1px 1px 4px 0px rgba(12,13,18,0.06), 2px 2px 8px 0px rgba(12,13,18,0.06);
+        font-size: 18px;
+        line-height: 60px;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        }
+    .select:focus{
+        outline: none;
+    }
+</style>
