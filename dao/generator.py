@@ -29,23 +29,37 @@ class Generator:
             if random <= t:
                 return w
 
-    def generate(self, word_separator):
-        sentences = ['^']
-        r = randint(1, sum(self.sent_head.values()))
-        for item in self.sent_head.items():
-            if r >= item[1]:
-                r -= item[1]
-            else:
-                sentences.append(item[0])
-                break
+    def generate(self, word_separator, starter=['^']):
+        prefix = len(starter)
+
+        sentences = starter[:]
+        while len(sentences) < self.key_len:
+            r = randint(1, sum(self.sent_head.values()))
+            for item in self.sent_head.items():
+                if r >= item[1]:
+                    r -= item[1]
+                else:
+                    sentences.append(item[0])
+                    print(item[0])
+                    break
 
         while True:
             end = sentences[-self.key_len:]
             next_word = self.get_next_word(end)
-            sentences.append(next_word)
             if next_word == '$':
                 break
-        return word_separator.join(sentences[1:-1])
+            else:
+                sentences.append(next_word)
+
+        print("======")
+
+        while prefix > 0:
+            prefix -= 1
+            sentences.pop(0)
+
+        print(sentences)
+
+        return word_separator.join(sentences), sentences[-self.key_len:]
 
 
 if __name__ == '__main__':
@@ -56,8 +70,10 @@ if __name__ == '__main__':
     g = Generator(dataset, head)
     number = 1
     result = ''
+    starter = ['^']
     for i in range(0, number):
-        result += g.generate(' ') + '\n'
+        next, starter = g.generate(' ', starter)
+        result += next + ', ' if i != number else '. '
 
     print(result)
 

@@ -1,62 +1,57 @@
 <html>
 <head>
-    <title>Marakov Gen
+    <title>修改中
     </title>
     <meta http-equiv="content-type" content="txt/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 </head>
 <body>
-<div id="主体">
-    <span id="slogan1">MARKOV </span>
-    <span id="slogan2">GEN </span>
-    <div id="标题">A Writing bot based on <b>Markov Chain</b></div>
-    <img id="logo" src="{{ url_for('static', filename='markov_gray.png')}}"/>
-    <div id="intro"><b>Markov Gen</b>is a writing bot based on<b>Markov Chain</b>.Please choose an article or upload<b>.txt file</b>by yourself.<br>
-         Enter the number of sentences you want to generate and press <b>Generate</b>. Then our bot can generate some <b>seemingly realistic sentences</b>.</div>
-
-
-
-    <div id="表单">
-        <form action="loginen" method="post" enctype="multipart/form-data">
-            <div id="选择文章">
-                <div id="提示">Choose An article</div>
-                <select name="theme" class="select">
-                    <option value="3">Harry Potter</option>
-                    <option value="4">The Hitchhiker's Guide to the Galaxy</option>
-                    <option value="5">Alice in Wonderland</option>
-                    <option value="6">The Old Man and Sea</option>
-                    <option value="7">Sherlock Holmes</option>
-                </select>
-            </div>
-            <div id="或">
-                OR
-            </div>
-            <div id="上传文章">
-                <div id="提示">Upload An article</div>
-                <div class="file">
-                    Upload
-                    <input type="file" name="myfile" accept="text/plain" id="upload"></input>
+    <div id="主体">
+        <span id="slogan1">MARKOV </span>
+        <span id="slogan2">GEN </span>
+        <br>
+        <div id="标题">基于马尔可夫链的写作机器人</div>
+        <img id="logo" src="{{ url_for('static', filename='markov_gray.png')}}"/>
+        <div id="intro"><b>Markov Gen</b>是一个基于<b>马尔可夫链</b>的写作机器人，选择要生成的演示文章，或自行上传<b>.txt文件</b>，<br>输入要生成的句子数量，点击生成，
+            就可以根据马尔可夫链生成一些<b>看似真实的句子</b>。</div>
+        <div id="表单">
+            <form action="/login" method="post" enctype="multipart/form-data">
+                <div id="选择文章">
+                    <div id="提示">选择文章</div>
+                    <select name="theme" class="select">
+                        <option value="1">活着</option>
+                        <option value="2">月亮与六便士</option>
+                    </select>
                 </div>
-            </div>
-            <div class="group" id="句数">
-                <div id="提示">Number of sentences</div>
-                <input type="number" min="0" max="1000" value="10" class="input" name="number"/>
-            </div>
-            <div class="btn-box" id="生成">
-                <button type="submit" class="button">Generate</button>
-            </div>
-        </form>
+                <div id="或">
+                    或
+                </div>
+                <div id="上传文章">
+                    <div id="提示">上传文章</div>
+                    <div class="file">
+                        上传文章
+                        <input type="file" name="myfile" accept="text/plain" id="upload"></input>
+                    </div>
+                </div>
+                <div class="group" id="句数">
+                    <div id="提示">文章句数</div>
+                    <input type="number" min="0" max="1000" value="10" class="input" name="number"/>
+                </div>
+                <div class="btn-box" id="生成">
+                    <button type="submit" class="button">生成</button>
+                </div>
+            </form>
+        </div>
+        <div id="文章">
+            {{str}}
+        </div>
+        <div id="英文">
+            <a href={{url_for('loginen')}} class="a">English</a>
+        </div>
+        <div id="github">
+            <a href={{url_for('github')}} class="a">Github</a>
+        </div>
     </div>
-    <div id="文章">
-        {{str}}
-    </div>
-    <div id="英文">
-        <a href={{url_for('login')}} class="a">简体中文</a>
-    </div>
-    <div id="github">
-        <a href={{url_for('github')}} class="a">Github</a>
-    </div>
-</div>
 </body>
 </html>
 
@@ -82,14 +77,16 @@
 
     #标题 {
         font-size: 48px;
-        font-weight: normal;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-weight: 1000;
+        font-family: "Microsoft YaHei UI";
         color: #0d0f0d;
         margin-bottom: 20px;
     }
+
     #logo {
         margin-bottom: 20px;
     }
+
     #英文 {
         font-family: "Icons16", sans-serif;
         font-weight: 100;
@@ -98,6 +95,7 @@
         margin-bottom: 1px;
         font-size: 18px;
     }
+
     #github {
         font-family: "Icons16", sans-serif;
         font-weight: 100;
@@ -106,6 +104,7 @@
         margin-bottom: 1px;
         font-size: 18px;
     }
+
     .a {
         font-style: normal;
         color: #000;
@@ -117,7 +116,7 @@
         padding: 10px;
         height: fit-content;
         width: fit-content;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-family: "Microsoft YaHei UI";
     }
 
     #提示 {
@@ -128,9 +127,9 @@
 
     #选择文章 {
         display: inline-block;
+        width: 200px;
         padding: 25px;
         text-align: center;
-
     }
 
     #或 {
@@ -143,13 +142,14 @@
 
     #上传文章 {
         display: inline-block;
+        width: 200px;
         padding: 25px;
         text-align: center;
-        position: relative;
     }
 
     #句数 {
         display: inline-block;
+        width: 200px;
         padding: 25px;
         text-align: center;
     }
@@ -176,9 +176,9 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        padding: 19.6px 61.475px;
+        padding: 18px 54px;
         font-size: 18px;
-        font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;;
+        font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;
         color: rgba(48, 52, 84, 1);
         border: none;
         border-radius: 16px;
@@ -194,12 +194,12 @@
     .file input {
         position: absolute;
         display: inline-block;
+        font-size: 50px;
+        top: 0px;
+        right: 0px;
+        opacity: 0;
         width: 100%;
         height: 100%;
-        font-size: 50px;
-        right: 0;
-        top: 0;
-        opacity: 0;
     }
 
     .file:hover {
@@ -217,7 +217,7 @@
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none;
-        padding: 19.6px 52.475px;
+        padding: 18px 72px;
         font-size: 18px;
         font-family: 'Montserrat', 'Helvetica', 'Helvetica Neue', 'Segoe UI', 'Arial', sans-serif;;
         color: rgba(48, 52, 84, 1);

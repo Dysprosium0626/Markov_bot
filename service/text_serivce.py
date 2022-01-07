@@ -27,9 +27,33 @@ class TextService:
         g = Generator(dataset, head)
         result = ""
         if LANG == 'ch':
-            for i in range(0, number):
-                result += g.generate('') + '。'
+            starter = ['^']
+            i = 0
+            while i < number:
+                try:
+                    next, starter = g.generate('', starter = starter)
+                except:
+                    starter = ['^']
+                    Newsent = True
+                    next, starter = g.generate('', starter = starter)
+                if next != '':
+                    result += next + ('，' if i != number-1 else '。')
+                    i += 1
+                else:
+                    continue
         else:
-            for i in range(0, number):
-                result += g.generate(' ') + '. '
+            starter = ['^']
+            i = 0
+            while i < number:
+                try:
+                    next, starter = g.generate(' ', starter = starter)
+                except:
+                    starter = ['^']
+                    Newsent = True
+                    next, starter = g.generate(' ', starter = starter)
+                if next != '':
+                    result += next + (', ' if i != number-1 else '. ')
+                    i += 1
+                else:
+                    continue
         return result

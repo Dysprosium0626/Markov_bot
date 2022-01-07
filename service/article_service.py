@@ -42,12 +42,57 @@ class ArticleService:
         g = Generator(dataset, head)
         result = ""
         if theme == '1':
-            for i in range(0, number):
-                result += g.generate('') + '。'
+            starter = ['^']
+            Newsent = False
+            i = 0
+            while i < number:
+                try:
+                    next, starter = g.generate('', starter = starter)
+                except:
+                    starter = ['^']
+                    Newsent = True
+                    next, starter = g.generate('', starter = starter)
+                if next != '':
+                    result += next + ('，' if i != number-1 else '。')
+                    i += 1
+                else:
+                    continue
+                Newsent = False
+
         elif theme == '2':
-            for i in range(0, number):
-                result += g.generate('') + '。'
+            starter = ['^']
+            Newsent = False
+            i = 0
+            while i < number:
+                try:
+                    next, starter = g.generate('', starter = starter)
+                except:
+                    starter = ['^']
+                    Newsent = True
+                    next, starter = g.generate('', starter = starter)
+                if next != '':
+                    result += next + ('，' if i != number-1 else '。')
+                    i += 1
+                else:
+                    continue
+                Newsent = False
+
         else:
-            for i in range(0, number):
-                result += g.generate(' ') + '. '
+            starter = ['^']
+            Newsent = False
+            i = 0
+            while i < number:
+                try:
+                    next, starter = g.generate(' ', starter = starter)
+                except:
+                    starter = ['^']
+                    Newsent = True
+                    next, starter = g.generate(' ', starter = starter)
+                if next != '':
+                    result += next + (', ' if i != number-1 else '. ')
+                    i += 1
+                else:
+                    continue
+                Newsent = False
+
         return result
