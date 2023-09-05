@@ -7,5 +7,5 @@ Jinja2==3.0.3
 MarkupSafe==2.0.1
 pip==21.3.1
 setuptools==59.5.0
-Werkzeug==2.0.2
+Werkzeug==2.2.3
 wheel==0.36.2
